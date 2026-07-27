@@ -1,163 +1,153 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-  <title>Whistle Watch</title>
-  <style>
-    :root{
-      --bg: #1c2024;
-      --panel: #262b31;
-      --panel-raised: #2e343b;
-      --line: #3a4048;
-      --text: #ece8e0;
-      --text-muted: #8b939b;
-      --brass: #c99a3b;
-      --brass-dim: #7a6230;
-      --steam: #5a88a3;
-      --alarm: #d64545;
-    }
-    *{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      background: radial-gradient(circle at 50% -10%, #22272d 0%, var(--bg) 55%);
-      color: var(--text);
-      font-family: 'IBM Plex Sans', system-ui, sans-serif;
-      display:flex;
-      justify-content:center;
-      padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
-    }
-    .app{
-      width:100%;
-      max-width: 480px;
-      padding: 28px 20px 40px;
-      display:flex;
-      flex-direction:column;
-      gap: 22px;
-    }
-    header{ text-align:center; }
-    .eyebrow{
-      font-family:'IBM Plex Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.28em;
-      color: var(--brass);
-      text-transform: uppercase;
-    }
-    h1{
-      font-family:'Oxanium', sans-serif;
-      font-weight:700;
-      font-size: 30px;
-      margin: 6px 0 2px;
-      letter-spacing: 0.01em;
-    }
-    .tagline{ color: var(--text-muted); font-size: 13.5px; margin:0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Whistle Watch</title>
+<style>
+  :root{
+    --bg: #1c2024;
+    --panel: #262b31;
+    --panel-raised: #2e343b;
+    --line: #3a4048;
+    --text: #ece8e0;
+    --text-muted: #8b939b;
+    --brass: #c99a3b;
+    --brass-dim: #7a6230;
+    --steam: #5a88a3;
+    --alarm: #d64545;
+  }
+  *{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html,body{ height:100%; }
+  body{
+    margin:0;
+    background: radial-gradient(circle at 50% -10%, #22272d 0%, var(--bg) 55%);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    display:flex;
+    justify-content:center;
+    padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
+  }
+  .app{
+    width:100%;
+    max-width: 480px;
+    padding: 28px 20px 40px;
+    display:flex;
+    flex-direction:column;
+    gap: 22px;
+  }
+  header{ text-align:center; }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: var(--brass);
+    text-transform: uppercase;
+  }
+  h1{
+    font-family:'Oxanium', sans-serif;
+    font-weight:700;
+    font-size: 30px;
+    margin: 6px 0 2px;
+    letter-spacing: 0.01em;
+  }
+  .tagline{ color: var(--text-muted); font-size: 13.5px; margin:0; }
 
-    /* ---- Gauge ---- */
-    .gauge-card{
-      background: linear-gradient(180deg, var(--panel-raised), var(--panel));
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 22px 18px 18px;
-      position:relative;
-      overflow:hidden;
-    }
-    .steam-wrap{ position:absolute; top:6px; left:50%; width:60px; height:60px; transform:translateX(-50%); pointer-events:none; }
-    .steam{
-      position:absolute; bottom:0; left:50%; width:5px; height:22px; border-radius: 3px;
-      background: linear-gradient(to top, rgba(236,232,224,0.28), rgba(236,232,224,0));
-      opacity:0; transform-origin: bottom center;
-    }
-    .steam.active{ animation: rise 2.4s ease-in infinite; }
-    .s1{ margin-left:-14px; animation-delay:0s; }
-    .s2{ margin-left:0px; animation-delay:0.5s; }
-    .s3{ margin-left:12px; animation-delay:1s; }
-    @keyframes rise{
-      0%{ opacity:0; transform: translate(-50%,0) scaleY(0.6); }
-      25%{ opacity:0.6; }
-      100%{ opacity:0; transform: translate(-50%,-34px) scaleY(1.3); }
-    }
-    @media (prefers-reduced-motion: reduce){
-      .steam.active{ animation: none; opacity:0.25; }
-    }
+  /* ---- Gauge ---- */
+  .gauge-card{
+    background: linear-gradient(180deg, var(--panel-raised), var(--panel));
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 22px 18px 18px;
+    position:relative;
+    overflow:hidden;
+  }
+  .steam-wrap{ position:absolute; top:6px; left:50%; width:60px; height:60px; transform:translateX(-50%); pointer-events:none; }
+  .steam{
+    position:absolute; bottom:0; left:50%; width:5px; height:22px; border-radius: 3px;
+    background: linear-gradient(to top, rgba(236,232,224,0.28), rgba(236,232,224,0));
+    opacity:0; transform-origin: bottom center;
+  }
+  .steam.active{ animation: rise 2.4s ease-in infinite; }
+  .s1{ margin-left:-14px; animation-delay:0s; }
+  .s2{ margin-left:0px; animation-delay:0.5s; }
+  .s3{ margin-left:12px; animation-delay:1s; }
+  @keyframes rise{
+    0%{ opacity:0; transform: translate(-50%,0) scaleY(0.6); }
+    25%{ opacity:0.6; }
+    100%{ opacity:0; transform: translate(-50%,-34px) scaleY(1.3); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .steam.active{ animation: none; opacity:0.25; }
+  }
 
-    svg.gauge{ display:block; margin: 0 auto; width: 100%; height: auto; max-width: 320px; }
-    .gauge-track{ fill:none; stroke: #383e46; stroke-width: 10; stroke-linecap: round; }
-    .gauge-fill{ fill:none; stroke: var(--brass); stroke-width: 10; stroke-linecap: round; transition: stroke 0.3s ease; }
-    .gauge-fill.alarm{ stroke: var(--alarm); }
-    .tick{ stroke: var(--text-muted); stroke-width: 2; }
-    .tick-label{ fill: var(--text-muted); font-family:'IBM Plex Mono', monospace; font-size: 11px; text-anchor: middle; }
-    .needle{ stroke: var(--text); stroke-width: 3; stroke-linecap: round; transition: transform 0.35s cubic-bezier(.34,1.4,.64,1); transform-origin: 160px 160px; }
-    .needle.alarm{ stroke: var(--alarm); }
-    .hub{ fill: var(--text); }
+  .gauge-readout{ text-align:center; padding: 18px 0 6px; }
+  .count{ font-family: 'Oxanium', 'Arial Black', sans-serif; font-weight:700; font-size: 88px; line-height:1; color: #c99a3b; color: var(--brass); transition: color 0.3s ease; }
+  .count.alarm{ color: #d64545; color: var(--alarm); }
+  .count-label{ font-family:'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-top: 4px; }
 
-    .gauge-readout{ text-align:center; margin-top: -6px; }
-    .count{ font-family:'Oxanium', sans-serif; font-weight:700; font-size: 48px; line-height:1; color: var(--brass); transition: color 0.3s ease; }
-    .count.alarm{ color: var(--alarm); }
-    .count-label{ font-family:'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
+  .status{
+    text-align:center; font-size: 14px; min-height: 20px; color: var(--steam);
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .status.alarm{ color: var(--alarm); font-weight:600; }
 
-    .status{
-      text-align:center; font-size: 14px; min-height: 20px; color: var(--steam);
-      font-family:'IBM Plex Mono', monospace;
-    }
-    .status.alarm{ color: var(--alarm); font-weight:600; }
+  button.primary{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600;
+    font-size: 16px;
+    padding: 15px 20px;
+    border-radius: 14px;
+    border: none;
+    background: var(--brass);
+    color: #1c2024;
+    cursor:pointer;
+  }
+  button.primary.listening{ background: var(--panel-raised); color: var(--text); border: 1px solid var(--brass-dim); }
+  button.primary:active{ transform: scale(0.98); }
 
-    button.primary{
-      font-family:'IBM Plex Sans', sans-serif;
-      font-weight:600;
-      font-size: 16px;
-      padding: 15px 20px;
-      border-radius: 14px;
-      border: none;
-      background: var(--brass);
-      color: #1c2024;
-      cursor:pointer;
-    }
-    button.primary.listening{ background: var(--panel-raised); color: var(--text); border: 1px solid var(--brass-dim); }
-    button.primary:active{ transform: scale(0.98); }
+  /* ---- Energy chart ---- */
+  .chart-card{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 14px 14px 10px;
+  }
+  .chart-card h2{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-muted); margin: 0 0 8px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  canvas#energyChart{ width:100%; height: 110px; display:block; border-radius: 8px; }
 
-    /* ---- Energy chart ---- */
-    .chart-card{
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 14px 14px 10px;
-    }
-    .chart-card h2{
-      font-family:'IBM Plex Mono', monospace;
-      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--text-muted); margin: 0 0 8px;
-      display:flex; justify-content:space-between; align-items:center;
-    }
-    canvas#energyChart{ width:100%; height: 110px; display:block; border-radius: 8px; }
+  /* ---- Settings ---- */
+  details.settings{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 4px 16px;
+  }
+  details.settings summary{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-muted); cursor:pointer; padding: 12px 0;
+    list-style: none;
+  }
+  details.settings summary::-webkit-details-marker{ display:none; }
+  details.settings summary::after{ content:'▾'; float:right; color: var(--brass); }
+  details.settings[open] summary::after{ content:'▴'; }
+  .setting-row{ padding: 10px 0 14px; border-top: 1px solid var(--line); }
+  .setting-row label{
+    display:flex; justify-content:space-between; font-size: 13px; color: var(--text); margin-bottom:6px;
+  }
+  .setting-row label span.val{ font-family:'IBM Plex Mono', monospace; color: var(--brass); }
+  .setting-row input[type=range]{ width:100%; accent-color: var(--brass); }
+  .setting-row p.hint{ font-size: 11.5px; color: var(--text-muted); margin: 6px 0 0; line-height:1.4; }
 
-    /* ---- Settings ---- */
-    details.settings{
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 4px 16px;
-    }
-    details.settings summary{
-      font-family:'IBM Plex Mono', monospace;
-      font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--text-muted); cursor:pointer; padding: 12px 0;
-      list-style: none;
-    }
-    details.settings summary::-webkit-details-marker{ display:none; }
-    details.settings summary::after{ content:'▾'; float:right; color: var(--brass); }
-    details.settings[open] summary::after{ content:'▴'; }
-    .setting-row{ padding: 10px 0 14px; border-top: 1px solid var(--line); }
-    .setting-row label{
-      display:flex; justify-content:space-between; font-size: 13px; color: var(--text); margin-bottom:6px;
-    }
-    .setting-row label span.val{ font-family:'IBM Plex Mono', monospace; color: var(--brass); }
-    .setting-row input[type=range]{ width:100%; accent-color: var(--brass); }
-    .setting-row p.hint{ font-size: 11.5px; color: var(--text-muted); margin: 6px 0 0; line-height:1.4; }
-
-    .footnote{ text-align:center; font-size: 11.5px; color: var(--text-muted); line-height:1.5; padding: 0 6px; }
-    .footnote strong{ color: var(--steam); }
-  </style>
+  .footnote{ text-align:center; font-size: 11.5px; color: var(--text-muted); line-height:1.5; padding: 0 6px; }
+  .footnote strong{ color: var(--steam); }
+</style>
 </head>
 <body>
 <div class="app">
@@ -175,14 +165,6 @@
       <div class="steam s3" id="steam3"></div>
     </div>
 
-    <svg class="gauge" viewBox="0 0 320 300">
-      <path class="gauge-track" id="gaugeTrack" d=""></path>
-      <path class="gauge-fill" id="gaugeFill" d=""></path>
-      <g id="ticks"></g>
-      <line class="needle" id="needle" x1="160" y1="160" x2="160" y2="70"></line>
-      <circle class="hub" cx="160" cy="160" r="7"></circle>
-    </svg>
-
     <div class="gauge-readout">
       <div class="count" id="countDisplay">0</div>
       <div class="count-label" id="countLabel">of 5 whistles</div>
@@ -194,7 +176,7 @@
   <button class="primary" id="toggleBtn">Start Listening</button>
 
   <div class="chart-card">
-    <h2><span>Whistle-band energy</span><span id="thresholdReadout">thr 0.30</span></h2>
+    <h2><span>Whistle-band energy</span><span id="thresholdReadout">thr 0.38</span></h2>
     <canvas id="energyChart"></canvas>
   </div>
 
@@ -207,8 +189,8 @@
     </div>
 
     <div class="setting-row">
-      <label>Energy threshold <span class="val" id="energyThresholdVal">0.30</span></label>
-      <input type="range" id="energyThreshold" min="0.05" max="0.9" step="0.01" value="0.30">
+      <label>Energy threshold <span class="val" id="energyThresholdVal">0.38</span></label>
+      <input type="range" id="energyThreshold" min="0.05" max="0.9" step="0.01" value="0.38">
       <p class="hint">If it misses real whistles, lower this. If background kitchen noise triggers false counts, raise it. Watch the chart above while adjusting.</p>
     </div>
 
@@ -239,356 +221,299 @@
 </div>
 
 <script>
-  (function(){
-    const GAUGE_CX = 160, GAUGE_CY = 160, GAUGE_R = 90;
-    const START_ANGLE = -235, END_ANGLE = 55; // degrees, 0 = pointing right, standard math convention, sweeps clockwise through bottom
+(function(){
+  const els = {
+    toggleBtn: document.getElementById('toggleBtn'),
+    statusText: document.getElementById('statusText'),
+    countDisplay: document.getElementById('countDisplay'),
+    countLabel: document.getElementById('countLabel'),
+    chart: document.getElementById('energyChart'),
+    thresholdReadout: document.getElementById('thresholdReadout'),
+    steam: [document.getElementById('steam1'), document.getElementById('steam2'), document.getElementById('steam3')],
 
-    const els = {
-      toggleBtn: document.getElementById('toggleBtn'),
-      statusText: document.getElementById('statusText'),
-      countDisplay: document.getElementById('countDisplay'),
-      countLabel: document.getElementById('countLabel'),
-      needle: document.getElementById('needle'),
-      gaugeFill: document.getElementById('gaugeFill'),
-      gaugeTrack: document.getElementById('gaugeTrack'),
-      ticksGroup: document.getElementById('ticks'),
-      chart: document.getElementById('energyChart'),
-      thresholdReadout: document.getElementById('thresholdReadout'),
-      steam: [document.getElementById('steam1'), document.getElementById('steam2'), document.getElementById('steam3')],
+    alarmThreshold: document.getElementById('alarmThreshold'),
+    alarmThresholdVal: document.getElementById('alarmThresholdVal'),
+    energyThreshold: document.getElementById('energyThreshold'),
+    energyThresholdVal: document.getElementById('energyThresholdVal'),
+    minGap: document.getElementById('minGap'),
+    minGapVal: document.getElementById('minGapVal'),
+    minDuration: document.getElementById('minDuration'),
+    minDurationVal: document.getElementById('minDurationVal'),
+    freqLow: document.getElementById('freqLow'),
+    freqHigh: document.getElementById('freqHigh'),
+    freqBandVal: document.getElementById('freqBandVal'),
+  };
 
-      alarmThreshold: document.getElementById('alarmThreshold'),
-      alarmThresholdVal: document.getElementById('alarmThresholdVal'),
-      energyThreshold: document.getElementById('energyThreshold'),
-      energyThresholdVal: document.getElementById('energyThresholdVal'),
-      minGap: document.getElementById('minGap'),
-      minGapVal: document.getElementById('minGapVal'),
-      minDuration: document.getElementById('minDuration'),
-      minDurationVal: document.getElementById('minDurationVal'),
-      freqLow: document.getElementById('freqLow'),
-      freqHigh: document.getElementById('freqHigh'),
-      freqBandVal: document.getElementById('freqBandVal'),
-    };
+  function updateCount(count, maxCount, isAlarm){
+    els.countDisplay.textContent = count;
+    els.countDisplay.classList.toggle('alarm', isAlarm);
+    els.countLabel.textContent = `of ${maxCount} whistles`;
+  }
 
-    function polar(cx, cy, r, deg){
-      const rad = deg * Math.PI / 180;
-      return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
-    }
+  // ---- Live params (read from sliders) ----
+  const params = {
+    alarmThreshold: parseInt(els.alarmThreshold.value, 10),
+    energyThreshold: parseFloat(els.energyThreshold.value),
+    minGap: parseFloat(els.minGap.value),
+    minDuration: parseFloat(els.minDuration.value),
+    freqLow: parseInt(els.freqLow.value, 10),
+    freqHigh: parseInt(els.freqHigh.value, 10),
+  };
 
-    function arcPath(cx, cy, r, startDeg, endDeg){
-      const s = polar(cx, cy, r, startDeg);
-      const e = polar(cx, cy, r, endDeg);
-      const largeArc = (endDeg - startDeg) % 360 > 180 ? 1 : 0;
-      return `M ${s.x} ${s.y} A ${r} ${r} 0 ${largeArc} 1 ${e.x} ${e.y}`;
-    }
+  function refreshParamLabels(){
+    els.alarmThresholdVal.textContent = params.alarmThreshold;
+    els.energyThresholdVal.textContent = params.energyThreshold.toFixed(2);
+    els.minGapVal.textContent = params.minGap.toFixed(1) + 's';
+    els.minDurationVal.textContent = params.minDuration.toFixed(1) + 's';
+    els.freqBandVal.textContent = `${params.freqLow}-${params.freqHigh} Hz`;
+    els.thresholdReadout.textContent = `thr ${params.energyThreshold.toFixed(2)}`;
+  }
 
-    function angleForFraction(frac){
-      return START_ANGLE + (END_ANGLE - START_ANGLE) * Math.min(Math.max(frac, 0), 1);
-    }
-
-    function drawTicks(maxCount){
-      els.ticksGroup.innerHTML = '';
-      for(let i=0; i<=maxCount; i++){
-        const deg = angleForFraction(i / maxCount);
-        const p1 = polar(GAUGE_CX, GAUGE_CY, GAUGE_R - 12, deg);
-        const p2 = polar(GAUGE_CX, GAUGE_CY, GAUGE_R - 2, deg);
-        const lbl = polar(GAUGE_CX, GAUGE_CY, GAUGE_R - 26, deg);
-        const line = document.createElementNS('http://www.w3.org/2000/svg','line');
-        line.setAttribute('class','tick');
-        line.setAttribute('x1', p1.x); line.setAttribute('y1', p1.y);
-        line.setAttribute('x2', p2.x); line.setAttribute('y2', p2.y);
-        els.ticksGroup.appendChild(line);
-
-        const text = document.createElementNS('http://www.w3.org/2000/svg','text');
-        text.setAttribute('class','tick-label');
-        text.setAttribute('x', lbl.x); text.setAttribute('y', lbl.y + 4);
-        text.textContent = i;
-        els.ticksGroup.appendChild(text);
-      }
-    }
-
-    function updateGauge(count, maxCount, isAlarm){
-      const frac = count / maxCount;
-      const deg = angleForFraction(frac);
-
-      els.gaugeTrack.setAttribute('d', arcPath(GAUGE_CX, GAUGE_CY, GAUGE_R, START_ANGLE, END_ANGLE));
-      els.gaugeFill.setAttribute('d', arcPath(GAUGE_CX, GAUGE_CY, GAUGE_R, START_ANGLE, deg));
-      els.gaugeFill.classList.toggle('alarm', isAlarm);
-
-      const rotation = deg - (-90); // needle SVG default points "up" i.e. -90deg in this coord system
-      els.needle.style.transform = `rotate(${rotation}deg)`;
-      els.needle.classList.toggle('alarm', isAlarm);
-
-      els.countDisplay.textContent = count;
-      els.countDisplay.classList.toggle('alarm', isAlarm);
-      els.countLabel.textContent = `of ${maxCount} whistles`;
-    }
-
-    // ---- Live params (read from sliders) ----
-    const params = {
-      alarmThreshold: parseInt(els.alarmThreshold.value, 10),
-      energyThreshold: parseFloat(els.energyThreshold.value),
-      minGap: parseFloat(els.minGap.value),
-      minDuration: parseFloat(els.minDuration.value),
-      freqLow: parseInt(els.freqLow.value, 10),
-      freqHigh: parseInt(els.freqHigh.value, 10),
-    };
-
-    function refreshParamLabels(){
-      els.alarmThresholdVal.textContent = params.alarmThreshold;
-      els.energyThresholdVal.textContent = params.energyThreshold.toFixed(2);
-      els.minGapVal.textContent = params.minGap.toFixed(1) + 's';
-      els.minDurationVal.textContent = params.minDuration.toFixed(1) + 's';
-      els.freqBandVal.textContent = `${params.freqLow}-${params.freqHigh} Hz`;
-      els.thresholdReadout.textContent = `thr ${params.energyThreshold.toFixed(2)}`;
-    }
-
-    els.alarmThreshold.addEventListener('input', () => {
-      params.alarmThreshold = parseInt(els.alarmThreshold.value, 10);
-      refreshParamLabels();
-      drawTicks(params.alarmThreshold);
-      updateGauge(state.count, params.alarmThreshold, false);
-    });
-    els.energyThreshold.addEventListener('input', () => {
-      params.energyThreshold = parseFloat(els.energyThreshold.value);
-      refreshParamLabels();
-    });
-    els.minGap.addEventListener('input', () => {
-      params.minGap = parseFloat(els.minGap.value);
-      refreshParamLabels();
-    });
-    els.minDuration.addEventListener('input', () => {
-      params.minDuration = parseFloat(els.minDuration.value);
-      refreshParamLabels();
-    });
-    els.freqLow.addEventListener('input', () => {
-      params.freqLow = Math.min(parseInt(els.freqLow.value, 10), params.freqHigh - 200);
-      refreshParamLabels();
-    });
-    els.freqHigh.addEventListener('input', () => {
-      params.freqHigh = Math.max(parseInt(els.freqHigh.value, 10), params.freqLow + 200);
-      refreshParamLabels();
-    });
-
-    drawTicks(params.alarmThreshold);
-    updateGauge(0, params.alarmThreshold, false);
+  els.alarmThreshold.addEventListener('input', () => {
+    params.alarmThreshold = parseInt(els.alarmThreshold.value, 10);
     refreshParamLabels();
+    updateCount(state.count, params.alarmThreshold, false);
+  });
+  els.energyThreshold.addEventListener('input', () => {
+    params.energyThreshold = parseFloat(els.energyThreshold.value);
+    refreshParamLabels();
+  });
+  els.minGap.addEventListener('input', () => {
+    params.minGap = parseFloat(els.minGap.value);
+    refreshParamLabels();
+  });
+  els.minDuration.addEventListener('input', () => {
+    params.minDuration = parseFloat(els.minDuration.value);
+    refreshParamLabels();
+  });
+  els.freqLow.addEventListener('input', () => {
+    params.freqLow = Math.min(parseInt(els.freqLow.value, 10), params.freqHigh - 200);
+    refreshParamLabels();
+  });
+  els.freqHigh.addEventListener('input', () => {
+    params.freqHigh = Math.max(parseInt(els.freqHigh.value, 10), params.freqLow + 200);
+    refreshParamLabels();
+  });
 
-    // ---- State ----
-    const state = {
-      listening: false,
-      count: 0,
-      inWhistle: false,
-      whistleStart: null,
-      belowSince: null,
-      energyHistory: [],       // for smoothing (rolling average)
-      chartHistory: [],        // for drawing the scrolling chart
-      audioCtx: null,
-      analyser: null,
-      stream: null,
-      rafId: null,
-    };
+  updateCount(0, params.alarmThreshold, false);
+  refreshParamLabels();
 
-    const SMOOTH_FRAMES = 5;
-    const CHART_SECONDS = 12;
+  // ---- State ----
+  const state = {
+    listening: false,
+    count: 0,
+    inWhistle: false,
+    whistleStart: null,
+    belowSince: null,
+    energyHistory: [],       // for smoothing (rolling average)
+    chartHistory: [],        // for drawing the scrolling chart
+    audioCtx: null,
+    analyser: null,
+    stream: null,
+    rafId: null,
+  };
 
-    function setStatus(text, isAlarm){
-      els.statusText.textContent = text;
-      els.statusText.classList.toggle('alarm', !!isAlarm);
+  const SMOOTH_FRAMES = 5;
+  const CHART_SECONDS = 12;
+
+  function setStatus(text, isAlarm){
+    els.statusText.textContent = text;
+    els.statusText.classList.toggle('alarm', !!isAlarm);
+  }
+
+  function setSteam(active){
+    els.steam.forEach(s => s.classList.toggle('active', active));
+  }
+
+  async function startListening(){
+    try{
+      state.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    }catch(err){
+      setStatus('Microphone permission denied or unavailable.', true);
+      return;
     }
 
-    function setSteam(active){
-      els.steam.forEach(s => s.classList.toggle('active', active));
-    }
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    state.audioCtx = new AudioCtx();
+    const source = state.audioCtx.createMediaStreamSource(state.stream);
+    state.analyser = state.audioCtx.createAnalyser();
+    state.analyser.fftSize = 4096;
+    source.connect(state.analyser);
 
-    async function startListening(){
-      try{
-        state.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      }catch(err){
-        setStatus('Microphone permission denied or unavailable.', true);
-        return;
+    state.listening = true;
+    state.count = 0;
+    state.inWhistle = false;
+    state.whistleStart = null;
+    state.belowSince = null;
+    state.energyHistory = [];
+    state.chartHistory = [];
+    updateCount(0, params.alarmThreshold, false);
+
+    els.toggleBtn.textContent = 'Stop Listening';
+    els.toggleBtn.classList.add('listening');
+    setStatus('Listening…');
+    setSteam(true);
+
+    tick();
+  }
+
+  function stopListening(){
+    state.listening = false;
+    if(state.rafId) cancelAnimationFrame(state.rafId);
+    if(state.stream) state.stream.getTracks().forEach(t => t.stop());
+    if(state.audioCtx) state.audioCtx.close();
+    els.toggleBtn.textContent = 'Start Listening';
+    els.toggleBtn.classList.remove('listening');
+    setStatus('Stopped. Tap start to listen again.');
+    setSteam(false);
+  }
+
+  function playAlarm(){
+    const ctx = state.audioCtx;
+    if(!ctx) return;
+    const beepDuration = 0.22, gap = 0.12, repeats = 4;
+    let t = ctx.currentTime + 0.02;
+    for(let i=0; i<repeats; i++){
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'square';
+      osc.frequency.value = 1046.5; // C6, cuts through kitchen noise
+      gain.gain.setValueAtTime(0.0001, t);
+      gain.gain.exponentialRampToValueAtTime(0.35, t + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + beepDuration);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start(t);
+      osc.stop(t + beepDuration + 0.02);
+      t += beepDuration + gap;
+    }
+  }
+
+  let lastFrameTime = null;
+
+  function tick(timestamp){
+    if(!state.listening) return;
+    if(lastFrameTime === null) lastFrameTime = timestamp;
+    const dt = (timestamp - lastFrameTime) / 1000;
+    lastFrameTime = timestamp;
+
+    const bufferLength = state.analyser.frequencyBinCount;
+    const data = new Uint8Array(bufferLength);
+    state.analyser.getByteFrequencyData(data);
+
+    const sampleRate = state.audioCtx.sampleRate;
+    const binWidth = sampleRate / state.analyser.fftSize;
+    const lowIdx = Math.max(0, Math.floor(params.freqLow / binWidth));
+    const highIdx = Math.min(bufferLength - 1, Math.ceil(params.freqHigh / binWidth));
+
+    let sum = 0, n = 0;
+    for(let i = lowIdx; i <= highIdx; i++){ sum += data[i]; n++; }
+    const rawEnergy = n > 0 ? (sum / n) / 255 : 0; // normalize 0..1
+
+    state.energyHistory.push(rawEnergy);
+    if(state.energyHistory.length > SMOOTH_FRAMES) state.energyHistory.shift();
+    const smoothed = state.energyHistory.reduce((a,b) => a+b, 0) / state.energyHistory.length;
+
+    // chart history (time-based, not frame-based, so chart speed is consistent)
+    state.chartHistory.push(smoothed);
+    const maxPoints = Math.round(CHART_SECONDS * 30); // approx assuming ~30fps
+    if(state.chartHistory.length > maxPoints) state.chartHistory.shift();
+    drawChart();
+
+    // ---- hysteresis whistle detection (mirrors the offline Python logic) ----
+    const above = smoothed > params.energyThreshold;
+    if(above){
+      if(!state.inWhistle){
+        setStatus('Whistle detected!');
+        state.whistleStart = timestamp;
       }
-
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      state.audioCtx = new AudioCtx();
-      const source = state.audioCtx.createMediaStreamSource(state.stream);
-      state.analyser = state.audioCtx.createAnalyser();
-      state.analyser.fftSize = 4096;
-      source.connect(state.analyser);
-
-      state.listening = true;
-      state.count = 0;
-      state.inWhistle = false;
-      state.whistleStart = null;
+      state.inWhistle = true;
       state.belowSince = null;
-      state.energyHistory = [];
-      state.chartHistory = [];
-      updateGauge(0, params.alarmThreshold, false);
-
-      els.toggleBtn.textContent = 'Stop Listening';
-      els.toggleBtn.classList.add('listening');
-      setStatus('Listening…');
-      setSteam(true);
-
-      tick();
-    }
-
-    function stopListening(){
-      state.listening = false;
-      if(state.rafId) cancelAnimationFrame(state.rafId);
-      if(state.stream) state.stream.getTracks().forEach(t => t.stop());
-      if(state.audioCtx) state.audioCtx.close();
-      els.toggleBtn.textContent = 'Start Listening';
-      els.toggleBtn.classList.remove('listening');
-      setStatus('Stopped. Tap start to listen again.');
-      setSteam(false);
-    }
-
-    function playAlarm(){
-      const ctx = state.audioCtx;
-      if(!ctx) return;
-      const beepDuration = 0.22, gap = 0.12, repeats = 4;
-      let t = ctx.currentTime + 0.02;
-      for(let i=0; i<repeats; i++){
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'square';
-        osc.frequency.value = 1046.5; // C6, cuts through kitchen noise
-        gain.gain.setValueAtTime(0.0001, t);
-        gain.gain.exponentialRampToValueAtTime(0.35, t + 0.02);
-        gain.gain.exponentialRampToValueAtTime(0.0001, t + beepDuration);
-        osc.connect(gain).connect(ctx.destination);
-        osc.start(t);
-        osc.stop(t + beepDuration + 0.02);
-        t += beepDuration + gap;
-      }
-    }
-
-    let lastFrameTime = null;
-
-    function tick(timestamp){
-      if(!state.listening) return;
-      if(lastFrameTime === null) lastFrameTime = timestamp;
-      const dt = (timestamp - lastFrameTime) / 1000;
-      lastFrameTime = timestamp;
-
-      const bufferLength = state.analyser.frequencyBinCount;
-      const data = new Uint8Array(bufferLength);
-      state.analyser.getByteFrequencyData(data);
-
-      const sampleRate = state.audioCtx.sampleRate;
-      const binWidth = sampleRate / state.analyser.fftSize;
-      const lowIdx = Math.max(0, Math.floor(params.freqLow / binWidth));
-      const highIdx = Math.min(bufferLength - 1, Math.ceil(params.freqHigh / binWidth));
-
-      let sum = 0, n = 0;
-      for(let i = lowIdx; i <= highIdx; i++){ sum += data[i]; n++; }
-      const rawEnergy = n > 0 ? (sum / n) / 255 : 0; // normalize 0..1
-
-      state.energyHistory.push(rawEnergy);
-      if(state.energyHistory.length > SMOOTH_FRAMES) state.energyHistory.shift();
-      const smoothed = state.energyHistory.reduce((a,b) => a+b, 0) / state.energyHistory.length;
-
-      // chart history (time-based, not frame-based, so chart speed is consistent)
-      state.chartHistory.push(smoothed);
-      const maxPoints = Math.round(CHART_SECONDS * 30); // approx assuming ~30fps
-      if(state.chartHistory.length > maxPoints) state.chartHistory.shift();
-      drawChart();
-
-      // ---- hysteresis whistle detection (mirrors the offline Python logic) ----
-      const above = smoothed > params.energyThreshold;
-      if(above){
-        if(!state.inWhistle){
-          setStatus('Whistle detected!');
-          state.whistleStart = timestamp;
-        }
-        state.inWhistle = true;
+    } else if(state.inWhistle){
+      if(state.belowSince === null){
+        state.belowSince = timestamp;
+      } else if((timestamp - state.belowSince) / 1000 >= params.minGap){
+        const durationSeconds = (state.belowSince - state.whistleStart) / 1000;
+        state.inWhistle = false;
         state.belowSince = null;
-      } else if(state.inWhistle){
-        if(state.belowSince === null){
-          state.belowSince = timestamp;
-        } else if((timestamp - state.belowSince) / 1000 >= params.minGap){
-          const durationSeconds = (state.belowSince - state.whistleStart) / 1000;
-          state.inWhistle = false;
-          state.belowSince = null;
-          state.whistleStart = null;
+        state.whistleStart = null;
 
-          if(durationSeconds < params.minDuration){
-            setStatus(`Ignored a ${durationSeconds.toFixed(1)}s blip (too short)`);
+        if(durationSeconds < params.minDuration){
+          setStatus(`Ignored a ${durationSeconds.toFixed(1)}s blip (too short)`);
+        } else {
+          state.count += 1;
+
+          if(state.count >= params.alarmThreshold){
+            updateCount(state.count, params.alarmThreshold, true);
+            setStatus(`Alarm! ${state.count} whistles reached.`, true);
+            playAlarm();
+            state.count = 0;
+            setTimeout(() => {
+              if(state.listening){
+                updateCount(0, params.alarmThreshold, false);
+                setStatus('Listening…');
+              }
+            }, 1800);
           } else {
-            state.count += 1;
-
-            if(state.count >= params.alarmThreshold){
-              updateGauge(state.count, params.alarmThreshold, true);
-              setStatus(`Alarm! ${state.count} whistles reached.`, true);
-              playAlarm();
-              state.count = 0;
-              setTimeout(() => {
-                if(state.listening){
-                  updateGauge(0, params.alarmThreshold, false);
-                  setStatus('Listening…');
-                }
-              }, 1800);
-            } else {
-              updateGauge(state.count, params.alarmThreshold, false);
-              setStatus('Listening…');
-            }
+            updateCount(state.count, params.alarmThreshold, false);
+            setStatus('Listening…');
           }
         }
       }
-
-      state.rafId = requestAnimationFrame(tick);
     }
 
-    function drawChart(){
-      const canvas = els.chart;
-      const dpr = window.devicePixelRatio || 1;
-      const cssWidth = canvas.clientWidth, cssHeight = canvas.clientHeight;
-      if(canvas.width !== cssWidth * dpr || canvas.height !== cssHeight * dpr){
-        canvas.width = cssWidth * dpr;
-        canvas.height = cssHeight * dpr;
-      }
-      const ctx = canvas.getContext('2d');
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, cssWidth, cssHeight);
+    state.rafId = requestAnimationFrame(tick);
+  }
 
-      const data = state.chartHistory;
-      const n = data.length;
-      if(n < 2) return;
-
-      // threshold line
-      const thresholdY = cssHeight - (params.energyThreshold * cssHeight);
-      ctx.strokeStyle = 'rgba(214,69,69,0.55)';
-      ctx.setLineDash([4,4]);
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(0, thresholdY);
-      ctx.lineTo(cssWidth, thresholdY);
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      // energy line
-      ctx.strokeStyle = '#c99a3b';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      data.forEach((v, i) => {
-        const x = (i / (n - 1)) * cssWidth;
-        const y = cssHeight - Math.min(v, 1) * cssHeight;
-        if(i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-      });
-      ctx.stroke();
+  function drawChart(){
+    const canvas = els.chart;
+    const dpr = window.devicePixelRatio || 1;
+    const cssWidth = canvas.clientWidth, cssHeight = canvas.clientHeight;
+    if(canvas.width !== cssWidth * dpr || canvas.height !== cssHeight * dpr){
+      canvas.width = cssWidth * dpr;
+      canvas.height = cssHeight * dpr;
     }
+    const ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, cssWidth, cssHeight);
 
-    els.toggleBtn.addEventListener('click', () => {
-      if(state.listening) stopListening(); else startListening();
+    const data = state.chartHistory;
+    const n = data.length;
+    if(n < 2) return;
+
+    // threshold line
+    const thresholdY = cssHeight - (params.energyThreshold * cssHeight);
+    ctx.strokeStyle = 'rgba(214,69,69,0.55)';
+    ctx.setLineDash([4,4]);
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, thresholdY);
+    ctx.lineTo(cssWidth, thresholdY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // energy line
+    ctx.strokeStyle = '#c99a3b';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    data.forEach((v, i) => {
+      const x = (i / (n - 1)) * cssWidth;
+      const y = cssHeight - Math.min(v, 1) * cssHeight;
+      if(i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
     });
+    ctx.stroke();
+  }
 
-    if('serviceWorker' in navigator){
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(() => {});
-      });
-    }
+  els.toggleBtn.addEventListener('click', () => {
+    if(state.listening) stopListening(); else startListening();
+  });
 
-  })();
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    });
+  }
+
+})();
 </script>
 </body>
 </html>
